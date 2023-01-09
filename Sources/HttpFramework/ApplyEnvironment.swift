@@ -13,7 +13,7 @@ public class ApplyEnvironment: HTTPLoader {
         super.load(task: task)
     }
     private func modifyRequest(request: HTTPRequest) -> HTTPRequest{
-        var copy = request
+        let copy = request
         
         // use the environment specified by the request, if it's present
         // if it doesn't have one, use the one passed to the initializer
@@ -35,7 +35,7 @@ public class ApplyEnvironment: HTTPLoader {
     }
 
     override public func load(request: HTTPRequest, completion: @escaping (HTTPResult) -> Void) {
-        var copy = modifyRequest(request: request)
+        let copy = modifyRequest(request: request)
         //print("\(copy.url?.absoluteString)")
         super.load(request: copy, completion: completion)
     }

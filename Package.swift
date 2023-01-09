@@ -7,15 +7,15 @@ let package = Package(
     name: "HttpFramework",
 	platforms: [
 		.macOS(.v10_15),
-		.iOS(.v14)],
+		.iOS(.v14)
+		],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
-        .library( name: "HttpFramework", targets: [
-			"HttpFramework"])   ],
+        .library( name: "HttpFramework", targets: ["HttpFramework"])   
+		],
     dependencies: [],
     targets: [
         .target(name: "HttpFramework" ),
-        .testTarget( name: "HttpFrameworkTest",
-					 dependencies: ["HttpFramework"])
-    ]
+        .testTarget( name: "HttpFrameworkTest", dependencies: ["HttpFramework"])
+    		]
 )

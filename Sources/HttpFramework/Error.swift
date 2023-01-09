@@ -12,6 +12,17 @@ public struct HTTPError: Error {
 
     /// If we have more information about the error that caused this, stash it here
     public let underlyingError: Error?
+    
+    public init(code: Code, request: HTTPRequest, response: HTTPResponse?, underlyingError: Error?){
+        self.code = code
+        self.request = request
+        self.response = response
+        self.underlyingError = underlyingError
+    }
+    
+    public init(code: Code, request: HTTPRequest){
+        self.init(code: code, request: request, response: nil, underlyingError: nil)
+    }
 
     public enum Code {
         case invalidRequest     // the HTTPRequest could not be turned into a URLRequest
