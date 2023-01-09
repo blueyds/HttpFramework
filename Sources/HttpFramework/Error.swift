@@ -21,7 +21,10 @@ public struct HTTPError: Error {
     }
     
     public init(code: Code, request: HTTPRequest){
-        self.init(code: code, request: request, response: nil, underlyingError: nil)
+        self.code = code
+        self.request = request
+        self.response = nil
+        self.underlyingError = nil
     }
 
     public enum Code {
