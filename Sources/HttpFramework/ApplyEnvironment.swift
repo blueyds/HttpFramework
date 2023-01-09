@@ -13,7 +13,7 @@ public class ApplyEnvironment: HTTPLoader {
         super.load(task: task)
     }
     private func modifyRequest(request: HTTPRequest) -> HTTPRequest{
-        let copy = request
+        var copy = request
         
         // use the environment specified by the request, if it's present
         // if it doesn't have one, use the one passed to the initializer
