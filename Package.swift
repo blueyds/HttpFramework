@@ -11,14 +11,11 @@ let package = Package(
 		],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
-        .library( name: "HttpFramework", targets: ["HttpFramework"]),
-        .library( name: "SWAPI", targets: ["SWAPI"]   
-		],
+        .library( name: "HttpFramework", targets: ["HttpFramework", "SWAPI"]),
+        ],
     dependencies: [],
     targets: [
         .target(name: "HttpFramework" ),
-        .testTarget( name: "HttpFrameworkTest", dependencies: ["HttpFramework"]),
         .target(name: "SWAPI", dependencies: ["HttpFramework"],
-        .testTarget( name: "SWAPITest", dependencies: ["SWAPI"]
     		]
 )
