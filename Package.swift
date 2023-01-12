@@ -17,6 +17,6 @@ let package = Package(
     dependencies: [],
     targets: [
         .target(name: "HttpFramework" ),
-        .target(name: "SWAPI", dependencies: [.target(name: "HttpFramework"])),
+        .target(name: "SWAPI", dependencies: [.target(name: "HttpFramework")),
     		]
 )
