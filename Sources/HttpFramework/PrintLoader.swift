@@ -5,7 +5,7 @@ public class PrintLoader: HTTPLoader {
         print("Loading \(task.request.url?.absoluteString)")
 		  task.addCompletionHandler(){result in
 			  print("Got result \(result)")
-			  completion(result)
+			  //completion(result)
 		  }
         super.load(task: task)
     }
