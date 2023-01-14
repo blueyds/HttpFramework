@@ -16,7 +16,7 @@ public class StarWarsAPI:JSONSimpleDecode {
     public func request(person: SWAPISelectPerson, completion: @escaping (SWAPI_Person) -> Void) {
         let request = HTTPRequest(path: person.rawValue)
 		  let task = HTTPTask(request: request){[self] result in
-			  if let body = result.response?.body? {
+			  if let body = result.response?.body {
 				  let d: SWAPI_Person = decode(from: body)
 				  completion(d)
 			  }
