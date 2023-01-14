@@ -23,4 +23,4 @@ public enum SWAPISelectPerson: String {
     case twenty = "people/20"
     case twentyone = "people/21"
    // case twentytwo = "people/22"
-  
+ }
