@@ -35,6 +35,6 @@ public class HTTPTask {
     }
     public func fail(_ code: HTTPError.Code){
         let error = HTTPError(code: code, request: self.request)
-        completion(.failure(error))
+        complete(with: error)
     }
 }

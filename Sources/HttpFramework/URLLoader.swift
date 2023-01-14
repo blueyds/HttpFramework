@@ -11,7 +11,7 @@ public class URLLoader: HTTPLoader {
                 responseData: data, 
                 response: response, 
                 error: error)
-            completion(result)
+            complete(result)
         }
         
         // off we go!
@@ -22,7 +22,7 @@ public class URLLoader: HTTPLoader {
     private func generateUrlRequest(from task: HTTPTask) -> URLRequest{
         guard let url = task.request.url else {
             // we couldn't construct a proper URL out of the request's URLComponents
-            completion(.failure(HTTPError(code: .invalidRequest, request: task.request, response: nil, underlyingError: nil)))
+            task.fail(HTTPError(code: .invalidRequest, request: task.request, response: nil, underlyingError: nil))
             return
         }
         
@@ -46,7 +46,7 @@ public class URLLoader: HTTPLoader {
                 urlRequest.httpBody = try task.request.body.encode()
             } catch {
                 // something went wrong creating the body; stop and report back
-                completion(.failure(HTTPError(code: .unknown, request: task.request, response: nil, underlyingError: nil)))
+                task.fail(HTTPError(code: .unknown, request: task.request, response: nil, underlyingError: nil))
                 return
             }
         }
