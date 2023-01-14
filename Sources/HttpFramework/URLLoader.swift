@@ -12,7 +12,7 @@ public class URLLoader: HTTPLoader {
                     responseData: data, 
                     response: response, 
                     error: error)
-                task.complete(result)
+                task.complete(with: result)
             }
             // off we go!
             dataTask.resume()
