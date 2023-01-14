@@ -2,28 +2,28 @@ import Foundation
 
 public class URLLoader: HTTPLoader {
     private let session: URLSession = URLSession.shared
+    
     public override func load(task: HTTPTask) {
-        let urlRequest = generateUrlRequest(from: task)
-        let dataTask = session.dataTask(with: urlRequest) { (data, response, error) in
+        if let urlRequest = generateUrlRequest(from: task){
+            let dataTask = session.dataTask(with: urlRequest) { (data, response, error) in
             // construct a Result<HTTPResponse, HTTPError> out of the triplet of data, url response, and url error
-            let result = HTTPResult(
-                request: task.request, 
-                responseData: data, 
-                response: response, 
-                error: error)
-            complete(result)
+                let result = HTTPResult(
+                    request: task.request, 
+                    responseData: data, 
+                    response: response, 
+                    error: error)
+                task.complete(result)
+            }
+            // off we go!
+            dataTask.resume()
         }
-        
-        // off we go!
-        dataTask.resume()
-
     }
     
-    private func generateUrlRequest(from task: HTTPTask) -> URLRequest{
+    private func generateUrlRequest(from task: HTTPTask) -> URLRequest?{
         guard let url = task.request.url else {
             // we couldn't construct a proper URL out of the request's URLComponents
             task.fail(.invalidRequest)
-            return
+            return nil
         }
         
         // construct the URLRequest
@@ -47,7 +47,7 @@ public class URLLoader: HTTPLoader {
             } catch {
                 // something went wrong creating the body; stop and report back
                 task.fail(.unknown)
-                return
+                return nil
             }
         }
         return urlRequest
