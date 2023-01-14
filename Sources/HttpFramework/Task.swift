@@ -26,8 +26,8 @@ public class HTTPTask {
     public func complete(with result: HTTPResult) {
         let handlers = completionHandlers
         completionHandlers = []
-        // invoke FIFO
-        handlers.forEach { $0(result) }
+        // invoke LIFO
+        handlers.reversed().forEach { $0(result) }
     }
     
     public func addCompletionHandler(_ handler: @escaping (HTTPResult) -> Void) {
