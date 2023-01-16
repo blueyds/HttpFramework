@@ -41,12 +41,15 @@ public class Throttle: HTTPLoader {
 		super.load(task: task)
 	}
 	private func startNextTasksIfAble() async{
-		while executable && !(await pendingRequests.isEmpty) {
-			print("executing next task from throttle")
-			// we have capicity to run more tasks and we have tasks to run
-			if let next = await pendingRequests.dequeue(){
-				start(task: next)
+		while await pendingRequests.isEmpty {
+			if executable {
+				print("executing next task from throttle")
+				// we have capicity to run more tasks and we have tasks to run
+				if let next = await pendingRequests.dequeue(){
+					start(task: next)
+				}	
 			}
+			
 		}
 	}
 }
