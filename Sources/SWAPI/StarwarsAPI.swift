@@ -7,6 +7,7 @@ extension ServerEnvironment {
 public class StarWarsAPI:JSONSimpleDecode {
     private let loader: HTTPLoader
     public static var shared: StarWarsAPI = StarWarsAPI()
+	 private let excludedPeople: Set<Int> = [17]
     private init(){
         let env: HTTPLoader = ApplyEnvironment(environment: .swapi)
         let urlLoad: HTTPLoader = URLLoader()
@@ -15,6 +16,7 @@ public class StarWarsAPI:JSONSimpleDecode {
         self.loader = env --> throttle --> printer --> urlLoad
     }
 	 public func request(personID: Int, completion: @escaping (SWAPI_Person) -> Void){
+		 if excludedPeople.contains(personID) || personID < 1 || personID > 83 { return }
 		 let path: String = "people/\(personID)"
 		 print(path)
 		 let request = HTTPRequest(path: path)
