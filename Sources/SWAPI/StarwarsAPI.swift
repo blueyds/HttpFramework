@@ -12,7 +12,7 @@ public class StarWarsAPI:JSONSimpleDecode {
         let env: HTTPLoader = ApplyEnvironment(environment: .swapi)
         let urlLoad: HTTPLoader = URLLoader()
         let printer: HTTPLoader = PrintLoader()
-		  let throttle: HTTPLoader = Throttle(maximumNumberOfRequests: 1)
+		  let throttle: HTTPLoader = Throttle(maximumNumberOfRequests: 5)
         self.loader = env --> throttle --> printer --> urlLoad
     }
 	 public func request(personID: Int, completion: @escaping (SWAPI_Person) -> Void){
