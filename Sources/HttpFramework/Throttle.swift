@@ -19,7 +19,9 @@ public class Throttle: HTTPLoader {
 	public override func load(task: HTTPTask){
 		task.addCompletionHandler { [self] _ in
 			self.end()
-			self.startNextTasksIfAble()
+			Task{
+				await self.startNextTasksIfAble()
+			}
 		}
 		Task{
 			if pendingRequests == nil {
