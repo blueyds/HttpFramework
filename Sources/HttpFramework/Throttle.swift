@@ -41,8 +41,8 @@ public class Throttle: HTTPLoader {
 		super.load(task: task)
 	}
 	private func startNextTasksIfAble() async{
-		async let isEmpty = pendingRequests.isEmpty
-		await print("Empty - \(isEmpty)\t Requests = \(requestsExecuting)\t ")
+		let isEmpty = await pendingRequests.isEmpty
+		print("Empty - \(isEmpty)\t Requests = \(requestsExecuting)\t ")
 		while isEmpty {
 			if executable {
 				print("executing next task from throttle")
