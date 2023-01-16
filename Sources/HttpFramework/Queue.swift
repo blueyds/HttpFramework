@@ -7,15 +7,15 @@ actor Queue<T> {
         buffer = Array(elements)
     }
     
-    var count: Int {
+    nonisolated var count: Int {
         buffer.count
     }
     
-    var isEmpty: Bool{
+    nonisolated var isEmpty: Bool{
         buffer.isEmpty
     }
     
-    var isFull: Bool {
+    nonisolated var isFull: Bool {
         !isEmpty
     }
     
@@ -30,7 +30,7 @@ actor Queue<T> {
         return nil
     }
     
-    func peek() -> T?{
+    nonisolated func peek() -> T?{
         buffer.first
     }
 }
