@@ -27,18 +27,18 @@ public class Throttle: HTTPLoader {
 		}
 		Task{
 			if pendingRequests == nil {
-				pendingRequests = await Stack([task])
+				pendingRequests = await Queue([task])
 			} else {
-				pendingRequests!.push(task)
+				pendingRequests!.enqueue(task)
 			}
 		}
 		startNextTasksIfAble()
 	}
 	private func begin(){
-		requestsExecuting =+ 1
+		requestsExecuting += 1
 	}
 	private func end(){
-		requestsExecuting =- 1
+		requestsExecuting -= 1
 	}
 	
 	private func start(task: HTTPTask){
@@ -49,7 +49,7 @@ public class Throttle: HTTPLoader {
 		Task{
 			while executable && !(isEmpty) {
 				// we have capicity to run more tasks and we have tasks to run
-				let next = await pendingRequests.removeFirst()
+				let next = await pendingRequests!.dequeue()
 				start(task: next)
 			}
 		}
