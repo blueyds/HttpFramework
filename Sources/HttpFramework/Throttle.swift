@@ -29,7 +29,7 @@ public class Throttle: HTTPLoader {
 				await pendingRequests!.enqueue(task)
 				isEmpty = false
 			}
-			startNextTasksIfAble()
+			await startNextTasksIfAble()
 		}
 	}
 	
@@ -51,7 +51,7 @@ public class Throttle: HTTPLoader {
 				if next == nil {
 					isEmpty = true
 				} else {
-					start(task: next)
+					start(task: next!)
 				}
 			}
 	}
