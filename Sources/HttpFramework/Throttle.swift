@@ -22,7 +22,7 @@ public class Throttle: HTTPLoader {
 		Task{
 			if pendingRequests == nil {
 				pendingResults = await Stack([task])
-			} else 
+			} else {
 				pendingResults!.push(task)
 			}
 		}
