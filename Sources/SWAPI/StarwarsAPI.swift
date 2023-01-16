@@ -18,7 +18,8 @@ public class StarWarsAPI:JSONSimpleDecode {
 		 let request = HTTPRequest(path: "person/\(personID)")
 		 let task = HTTPTask(request: request){[self] result in
 			  if let body = result.response?.body {
-				  print("Decoding \(personID)")
+				  print("Decoding \(task.request.url)")
+				  print(String(body))
 				  let d: SWAPI_Person = decode(from: body)
 				  completion(d)
 			  }
