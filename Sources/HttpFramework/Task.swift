@@ -5,7 +5,7 @@ public class HTTPTask {
     public var request: HTTPRequest
     //private let completion: (HTTPResult) -> Void
     private var cancellationHandlers = Array<() -> Void>()
-    private var completionHandlers = Array<(HTTPResult) -> Void>()
+    private var completionHandlers = Array<(HTTPResult) async -> Void>()
     
     public init(request: HTTPRequest, completion: @escaping (HTTPResult) -> Void) {
         self.request = request
@@ -27,10 +27,13 @@ public class HTTPTask {
         let handlers = completionHandlers
         completionHandlers = []
         // invoke LIFO
-        handlers.reversed().forEach { $0(result) }
+		  Task{
+				handlers.reversed().forEach { await $0(result) }  
+		  }
+        
     }
     
-    public func addCompletionHandler(_ handler: @escaping (HTTPResult) -> Void) {
+    public func addCompletionHandler(_ handler: @escaping (HTTPResult) async -> Void) {
         self.completionHandlers.append(handler)
     }
     public func fail(_ code: HTTPError.Code){
