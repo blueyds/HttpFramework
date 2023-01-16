@@ -42,7 +42,7 @@ public class Throttle: HTTPLoader {
 		requestsExecuting -= 1
 	}
 	
-	private func start(task: HTTPTask) async{
+	private func start(task: HTTPTask){
 		self.begin()
 		super.load(task: task)
 	}
