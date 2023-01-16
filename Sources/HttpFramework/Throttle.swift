@@ -21,7 +21,7 @@ public class Throttle: HTTPLoader {
 		self.maximumNumberOfRequests = maximumNumberOfRequests
 	}
 	public override func load(task: HTTPTask){
-		task.addCompletionHandler { [self] _ n
+		task.addCompletionHandler { [self] _ in
 			self.end()
 			self.startNextTasksIfAble()
 		}
