@@ -15,7 +15,7 @@ public class StarWarsAPI:JSONSimpleDecode {
         self.loader = env --> throttle --> printer --> urlLoad
     }
 	 public func request(personID: Int, completion: @escaping (SWAPI_Person) -> Void){
-		 let path: String = "person/\(personID)"
+		 let path: String = "people/\(personID)"
 		 print(path)
 		 let request = HTTPRequest(path: path)
 		 let task = HTTPTask(request: request){[self] result in
