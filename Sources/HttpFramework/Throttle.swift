@@ -7,12 +7,14 @@ public class Throttle: HTTPLoader {
 	// TODO: Unthrottled request
 	public var maximumNumberOfRequests = UInt.max
 	private var requestsExecuting = UInt(0)
-	private var pendingRequests: Queue<HTTPTask>? = nil
+	private var pendingRequests: Queue<HTTPTask> = Queue<HTTPTask>()
 	
 	private var executable: Bool { // we can execute more tasks
 		UInt(requestsExecuting) < maximumNumberOfRequests
 	}
-	private var isEmpty: Bool = true
+	private var isEmpty: Bool {
+		pendingRequests.isEmpty
+	}
 	public init(maximumNumberOfRequests: UInt){
 		self.maximumNumberOfRequests = maximumNumberOfRequests
 	}
@@ -24,13 +26,7 @@ public class Throttle: HTTPLoader {
 			}
 		}
 		Task{
-			if pendingRequests == nil {
-				pendingRequests = Queue([task])
-				isEmpty = false
-			} else {
-				await pendingRequests!.enqueue(task)
-				isEmpty = false
-			}
+			await pendingRequests.enqueue(task)
 			await startNextTasksIfAble()
 		}
 	}
@@ -47,15 +43,12 @@ public class Throttle: HTTPLoader {
 		super.load(task: task)
 	}
 	private func startNextTasksIfAble() async{
-			while executable && !(isEmpty) {
-				print("executing next task from throttle")
-				// we have capicity to run more tasks and we have tasks to run
-				let next = await pendingRequests!.dequeue()
-				if next == nil {
-					isEmpty = true
-				} else {
-					start(task: next!)
-				}
+		while executable && !(isEmpty) {
+			print("executing next task from throttle")
+			// we have capicity to run more tasks and we have tasks to run
+			if let next = await pendingRequests.dequeue(){
+				start(task: next!)
 			}
+		}
 	}
 }
