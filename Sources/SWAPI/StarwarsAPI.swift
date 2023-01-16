@@ -14,7 +14,7 @@ public class StarWarsAPI:JSONSimpleDecode {
 		  let throttle: HTTPLoader = Throttle(maximumNumberOfRequests: 1)
         self.loader = env --> throttle --> urlLoad
     }
-	 public func request(personID: Int, completion: @escaping (SWAPI_Person) -> Void)){
+	 public func request(personID: Int, completion: @escaping (SWAPI_Person) -> Void){
 		 let request = HTTPRequest(path: "person/\(personID)")
 		 let task = HTTPTask(request: request){[self] result in
 			  if let body = result.response?.body {
