@@ -13,7 +13,7 @@ public class Throttle: HTTPLoader {
 		UInt(requestsExecuting) < maximumNumberOfRequests
 	}
 	private var isEmpty: Bool = true
-	init(maximumNumberOfRequests: UInt){
+	public init(maximumNumberOfRequests: UInt){
 		self.maximumNumberOfRequests = maximumNumberOfRequests
 	}
 	public override func load(task: HTTPTask){
