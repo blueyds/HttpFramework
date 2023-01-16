@@ -11,28 +11,34 @@ public class Throttle: HTTPLoader {
 	private var executable: Bool { // we can execute more tasks
 		UInt(requestsExecuting) < maximumNumberOfRequests
 	}
+	private var isEmpty: Bool {
+		if pendingRequests != nil{
+			return pendingRequests!.isEmpty
+		}
+		return true
+	}
 	init(maximumNumberOfRequests: UInt){
-		self.maximumNumberOfRequests = maximunNumberOfRequests
+		self.maximumNumberOfRequests = maximumNumberOfRequests
 	}
 	public override func load(task: HTTPTask){
-		task.addCompletionHandler { [self]
+		task.addCompletionHandler { [self] _ n
 			self.end()
 			self.startNextTasksIfAble()
 		}
 		Task{
 			if pendingRequests == nil {
-				pendingResults = await Stack([task])
+				pendingRequests = await Stack([task])
 			} else {
-				pendingResults!.push(task)
+				pendingRequests!.push(task)
 			}
 		}
 		startNextTasksIfAble()
 	}
 	private func begin(){
-		requestsExecuting++
+		requestsExecuting =+ 1
 	}
 	private func end(){
-		requestsExecuting--
+		requestsExecuting =- 1
 	}
 	
 	private func start(task: HTTPTask){
@@ -41,7 +47,7 @@ public class Throttle: HTTPLoader {
 	}
 	private func startNextTasksIfAble() {
 		Task{
-			while executable && !(pendingRequests.isEmpty) {
+			while executable && !(isEmpty) {
 				// we have capicity to run more tasks and we have tasks to run
 				let next = await pendingRequests.removeFirst()
 				start(task: next)
