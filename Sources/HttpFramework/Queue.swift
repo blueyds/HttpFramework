@@ -6,6 +6,10 @@ public actor Queue<T> {
     public init<S: Sequence>(_ elements: S) where S.Element == T {
         buffer = Array(elements)
     }
+	 
+	 public init(){
+		 buffer = [T]()
+	 }
     
     public var count: Int {
         buffer.count
