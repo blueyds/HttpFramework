@@ -1,32 +1,32 @@
 import Foundation
 
-actor Stack<T> {
+public actor Stack<T> {
     private var buffer: [T]
     
-    init<S: Sequence>(_ elements: S) where S.Element == T {
+    public init<S: Sequence>(_ elements: S) where S.Element == T {
         buffer = Array(elements)
     }
     
-    var count: Int {
+    public var count: Int {
         buffer.count
     }
     
-    var isEmpty: Bool{
+    public var isEmpty: Bool{
         buffer.isEmpty
     }
     
-    func push(_ element: T) {
+    public func push(_ element: T) {
         buffer.append(element)
     }
     
-    func pop() -> T? {
+    public func pop() -> T? {
         if !isEmpty {
             return buffer.removeLast()
         }
         return nil
     }
     
-    func peek() -> T?{
+    public func peek() -> T?{
         buffer.last
     }
 }
