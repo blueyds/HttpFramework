@@ -19,6 +19,6 @@ let package = Package(
     targets: [
         .target(name: "HttpFramework" ),
         .target(name: "SWAPI", dependencies: ["HttpFramework", "JSONSimpleDecode"]),
-        .taeget(name: "JSONSimpleDecode"),
+        .target(name: "JSONSimpleDecode"),
     		]
 )
