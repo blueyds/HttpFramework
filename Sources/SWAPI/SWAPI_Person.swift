@@ -1,12 +1,12 @@
 import Foundation
 
-public struct SWAPI_Person: Codable {
+public struct SWAPI_Person: Hashable, Codable {
     public var name: String
-    public var birth_year: String
+    public var _birth_year: String
     public var eye_color: String
     public var gender: String
     public var hair_color: String
-    public var height: String
+    public var _height: String
     public var mass: String
     public var skin_color: String
     public var homeworld: String
@@ -17,6 +17,28 @@ public struct SWAPI_Person: Codable {
     public var url: String
     public var created: String
     public var edited: String
+	 public lazy var height: Double {
+		 Double(_height) ?? 0.0
+	 }
+	 
+	 enum codingKeys: Strting, CodingKey{
+		 case name
+		 case birth_year
+		 case eye_color
+		 case gender
+		 case hair_color
+		 case height = "_height"
+		 case mass
+		 case skin_color
+		 case homeworld
+		 case films
+		 case starships
+		 case vehicles
+		 case url
+		 case created
+		 case edited
+	 }
+	 
 }
 /*
  name string -- The name of this person.

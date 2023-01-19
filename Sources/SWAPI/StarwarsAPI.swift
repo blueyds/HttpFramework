@@ -1,5 +1,6 @@
 import Foundation
 import HttpFramework
+import JSONSimpleDecode
 
 extension ServerEnvironment {
     public static var swapi = ServerEnvironment(host: "swapi.dev", pathPrefix: "/api/")
