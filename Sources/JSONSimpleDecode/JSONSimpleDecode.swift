@@ -1,11 +1,11 @@
 import Foundation
 
-protocol JSONSimpleDecode{
+public protocol JSONSimpleDecode{
     func decode<T: Decodable>(from data: Data, dateDecodingStrategy: JSONDecoder.DateDecodingStrategy, keyDecodingStrategy : JSONDecoder.KeyDecodingStrategy) -> T
 }
 
 extension JSONSimpleDecode{
-    func decode<T: Decodable>(from data: Data, dateDecodingStrategy: JSONDecoder.DateDecodingStrategy = .deferredToDate, keyDecodingStrategy : JSONDecoder.KeyDecodingStrategy = .useDefaultKeys) -> T{
+    public func decode<T: Decodable>(from data: Data, dateDecodingStrategy: JSONDecoder.DateDecodingStrategy = .deferredToDate, keyDecodingStrategy : JSONDecoder.KeyDecodingStrategy = .useDefaultKeys) -> T{
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = dateDecodingStrategy
         decoder.keyDecodingStrategy = keyDecodingStrategy
