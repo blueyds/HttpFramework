@@ -59,7 +59,7 @@ extension HTTPRequest {
     public mutating func addQueryItem(item: URLQueryItem){
         urlComponents.queryItems?.append(item)
     }
-    public func addQueryItem(name: String, value: String){
+    public mutating func addQueryItem(name: String, value: String){
         addQueryItem(item: URLQueryItem(name: name, value: value))
     }
     
