@@ -60,7 +60,7 @@ extension HTTPRequest {
         urlComponents.queryItems?.append(item)
     }
     public func addQueryItem(name: String, value: String){
-        addQueryItem(URLQueryItem((name: name, value: value))
+        addQueryItem(item: URLQueryItem(name: name, value: value))
     }
     
 }
