@@ -56,8 +56,8 @@ extension HTTPRequest {
         set { self[option: ServerEnvironment.self] = newValue }
     }
     
-    public mutating func addQueryItem(item: URLQueryItem){
-        urlComponents.queryItems?.append(item)
+    public mutating func addQueryItem(name: String, value: String){
+        urlComponents.queryItems?.append(URLQueryItem(name: name, value: value))
     }
     
 }
