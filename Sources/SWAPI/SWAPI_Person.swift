@@ -17,9 +17,7 @@ public struct SWAPI_Person: Hashable, Codable {
     public var url: String
     public var created: String
     public var edited: String
-	public lazy var height: Double = {
-		 Double(_height) ?? 0.0
-	 }
+	public lazy var height: Double = Double(_height) ?? 0.0
 	 
 	 enum codingKeys: String, CodingKey{
 		 case name
