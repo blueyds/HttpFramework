@@ -30,7 +30,7 @@ extension HTTPRequest {
         get { urlComponents.path }
         set { urlComponents.path = newValue }
     }
-    var url: URL? { urlComponents.url }
+    public var url: URL? { urlComponents.url }
     
     public subscript<O: HTTPRequestOption>(option type: O.Type) -> O.Value {
         get {
