@@ -5,7 +5,7 @@ public struct HTTPRequest {
     public var method: HTTPMethod = .get // the struct we previously defined
     public var headers: [String: String] = [:]
     public var body: HTTPBody = EmptyBody()
-    public var queries:: [URLQueryItem] = []
+    public var queries: [URLQueryItem] = []
     private var options = [ObjectIdentifier: Any]()
     public var id: UUID = UUID()
     
