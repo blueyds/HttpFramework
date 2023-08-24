@@ -5,6 +5,7 @@ public struct HTTPRequest {
     public var method: HTTPMethod = .get // the struct we previously defined
     public var headers: [String: String] = [:]
     public var body: HTTPBody = EmptyBody()
+    public var queries:: [URLQueryItem] = []
     private var options = [ObjectIdentifier: Any]()
     public var id: UUID = UUID()
     
@@ -57,7 +58,9 @@ extension HTTPRequest {
     }
     
     public mutating func addQueryItem(item: URLQueryItem){
-        urlComponents.queryItems?.append(item)
+        queries.append(item)
+        // TODO we could probablu turn this in to a get setter
+        urlComponents.queryItems = queries
     }
     public mutating func addQueryItem(name: String, value: String){
         addQueryItem(item: URLQueryItem(name: name, value: value))
